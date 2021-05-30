@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type_document: one
+  admin_user: one
+  modele: MyText
+  etat: MyString
+
+two:
+  type_document: two
+  admin_user: two
+  modele: MyText
+  etat: MyString

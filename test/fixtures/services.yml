@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type_document: one
+  prestation: MyString
+  etat: MyString
+
+two:
+  type_document: two
+  prestation: MyString
+  etat: MyString
