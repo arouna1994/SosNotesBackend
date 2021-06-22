@@ -1,7 +1,7 @@
 class AdminUserController < ApplicationController
     include ActionView::Helpers::DateHelper
     before_action :set_default_locale
-
+    
     def set_default_locale
         begin
             I18n.default_locale = :fr
@@ -12,11 +12,43 @@ class AdminUserController < ApplicationController
             I18n.default_locale = :fr
         end
     end
+    #method to create user
+    def create
+        begin
+            adminUser=AdminUser.create!(
+                :pays =>  params[:pays],
+                :nom =>  params[:nom],
+                :prenom =>  params[:prenom],
+                :date_naiss =>  params[:date_naiss],
+                :profil =>  params[:profil],
+                :etat =>  "actif",
+                :email =>  params[:email],
+                :telephone =>  params[:telephone],
+                :password =>  params[:password]
+                )
 
+                result = {
+                    :success => true,
+                    :code => 200,
+                    :id => adminUser.id
+                }
+            rescue Exception => e 
+                result = {
+                    :success => false,
+                    :code => 500,
+                    :message => e.to_s
+                }
+            end
+            respond_to do |format|
+                format.html
+                format.json  { render :json => result.to_json }   
+            
+        end
+    end
     #method to process login
     def login
         begin
-            adminUser = AdminUser.find_for_authentication(:email => params[:email])
+            adminUser= AdminUser.find_for_authentication(:email => params[:email])
             if(adminUser!=nil && adminUser.valid_password?(params[:password]))
                 if(adminUser.etat.eql?("actif"))#everything ok
                     result = {
@@ -28,7 +60,8 @@ class AdminUserController < ApplicationController
                         :date_naissance => adminUser.date_naiss,
                         :pays => adminUser.pays,
                         :profil => adminUser.profil,
-                        :telephone => adminUser.telephone
+                        :telephone => adminUser.telephone,
+                        :id => adminUser.id
                     }
                     historique = Historique.new 
                     historique.admin_user = adminUser
@@ -77,7 +110,7 @@ class AdminUserController < ApplicationController
                 :success => true,
                 :code => 200
             }
-        rescue Exception => e #something wrong
+         rescue Exception => e #something wrong
             result = {
                 :success => false,
                 :code => "500",

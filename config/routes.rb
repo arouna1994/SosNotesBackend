@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: "admin/dashboard#index"  
 
   #gestion des utilisateurs
+  post '/api/v1/create' => 'admin_user#create'
   post '/api/v1/login' => 'admin_user#login'
   post '/api/v1/logout' => 'admin_user#logout'
   get '/api/v1/infoUser' => 'admin_user#infoUser'
@@ -18,10 +19,13 @@ Rails.application.routes.draw do
 
   #gestion des apis des demandes
   get 'api/v1/demandes' => 'demande#index'
-  get 'api/v1/creer_demande' => 'demande#createByUser'
+  post 'api/v1/creer_demande' => 'demande#createByUser'
   get 'api/v1/demandeParUtilisateur' => 'demande#listeByUser'
 
 
   #gestion des apis des types de documents
   get 'api/v1/type_documents' => 'type_document#index'
+
+  #gestion des services
+  post 'api/v1/affecterService' => 'service#affecterUtilisateur'
 end

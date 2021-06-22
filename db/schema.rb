@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_06_074926) do
+ActiveRecord::Schema.define(version: 2021_06_22_085523) do
 
-  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "demandes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "demandes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "type_document_id", null: false
     t.bigint "admin_user_id", null: false
     t.text "modele"
@@ -82,7 +82,35 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["type_document_id"], name: "index_demandes_on_type_document_id"
   end
 
-  create_table "historiques", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "donnees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "type_document_id", null: false
+    t.string "structure_ciblee"
+    t.string "nom"
+    t.string "prenom"
+    t.string "date_naissance"
+    t.string "etat_civil"
+    t.string "adresse_phy"
+    t.string "email"
+    t.string "telephone"
+    t.string "parcours_etude"
+    t.text "stage"
+    t.text "emploi"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["type_document_id"], name: "index_donnees_on_type_document_id"
+  end
+
+  create_table "expressions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "donnee_id", null: false
+    t.string "oral"
+    t.string "ecrit"
+    t.string "comprehension"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["donnee_id"], name: "index_expressions_on_donnee_id"
+  end
+
+  create_table "historiques", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "libelle"
     t.bigint "admin_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -90,7 +118,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["admin_user_id"], name: "index_historiques_on_admin_user_id"
   end
 
-  create_table "piece_jointes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "piece_jointes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "demande_id", null: false
     t.string "uuid"
     t.string "tag"
@@ -103,7 +131,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["demande_id"], name: "index_piece_jointes_on_demande_id"
   end
 
-  create_table "services", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "services", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "type_document_id", null: false
     t.string "prestation"
     t.string "etat"
@@ -112,7 +140,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
     t.index ["type_document_id"], name: "index_services_on_type_document_id"
   end
 
-  create_table "type_documents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "type_documents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "libelle"
     t.string "etat"
     t.datetime "created_at", precision: 6, null: false
@@ -122,7 +150,10 @@ ActiveRecord::Schema.define(version: 2020_12_06_074926) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "demandes", "admin_users"
   add_foreign_key "demandes", "type_documents"
+  add_foreign_key "donnees", "type_documents"
   add_foreign_key "historiques", "admin_users"
   add_foreign_key "piece_jointes", "demandes"
   add_foreign_key "services", "type_documents"
+  add_foreign_key "expressions", "donnees"
+
 end

@@ -1,0 +1,131 @@
+current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/mysql-2.9.1/ext/mysql_api
+/usr/bin/ruby2.6 -I /usr/lib/ruby/2.6.0 -r ./siteconf20210619-76874-1hcr3kn.rb extconf.rb
+checking for mysql_ssl_set()... yes
+checking for rb_str_set_len()... yes
+checking for rb_thread_start_timer()... no
+checking for mysql.h... yes
+creating Makefile
+
+current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/mysql-2.9.1/ext/mysql_api
+make "DESTDIR=" clean
+
+current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/mysql-2.9.1/ext/mysql_api
+make "DESTDIR="
+compiling mysql.c
+mysql.c:79:2: error: unknown type name ‘my_bool’
+   79 |  my_bool *is_null;
+      |  ^~~~~~~
+mysql.c: In function ‘options’:
+mysql.c:361:5: error: unknown type name ‘my_bool’; did you mean ‘bool’?
+  361 |     my_bool b;
+      |     ^~~~~~~
+      |     bool
+mysql.c:391:10: error: ‘MYSQL_SET_CLIENT_IP’ undeclared (first use in this function); did you mean ‘MYSQL_SET_CHARSET_DIR’?
+  391 |     case MYSQL_SET_CLIENT_IP:
+      |          ^~~~~~~~~~~~~~~~~~~
+      |          MYSQL_SET_CHARSET_DIR
+mysql.c:391:10: note: each undeclared identifier is reported only once for each function it appears in
+mysql.c:398:10: error: ‘MYSQL_SECURE_AUTH’ undeclared (first use in this function); did you mean ‘MYSQL_DEFAULT_AUTH’?
+  398 |     case MYSQL_SECURE_AUTH:
+      |          ^~~~~~~~~~~~~~~~~
+      |          MYSQL_DEFAULT_AUTH
+mysql.c: In function ‘stmt_init’:
+mysql.c:878:5: error: ‘my_bool’ undeclared (first use in this function)
+  878 |     my_bool true = 1;
+      |     ^~~~~~~
+mysql.c:878:12: error: expected ‘;’ before numeric constant
+  878 |     my_bool true = 1;
+      |            ^
+      |            ;
+mysql.c:883:61: error: lvalue required as unary ‘&’ operand
+  883 |     if (mysql_stmt_attr_set(s, STMT_ATTR_UPDATE_MAX_LENGTH, &true))
+      |                                                             ^
+mysql.c: In function ‘stmt_bind_result’:
+mysql.c:1320:74: error: ‘rb_cFixnum’ undeclared (first use in this function)
+ 1320 |  else if (argv[i] == rb_cNumeric || argv[i] == rb_cInteger || argv[i] == rb_cFixnum)
+      |                                                                          ^~~~~~~~~~
+mysql.c: In function ‘stmt_prepare’:
+mysql.c:1681:32: warning: assignment to ‘_Bool *’ from incompatible pointer type ‘int *’ [-Wincompatible-pointer-types]
+ 1681 |      s->result.bind[i].is_null = &(s->result.is_null[i]);
+      |                                ^
+In file included from /usr/include/ruby-2.6.0/ruby.h:33,
+                 from mysql.c:5:
+mysql.c: In function ‘Init_mysql_api’:
+mysql.c:2049:52: error: ‘MYSQL_SECURE_AUTH’ undeclared (first use in this function); did you mean ‘MYSQL_DEFAULT_AUTH’?
+ 2049 |     rb_define_const(cMysql, "SECURE_AUTH", INT2NUM(MYSQL_SECURE_AUTH));
+      |                                                    ^~~~~~~~~~~~~~~~~
+/usr/include/ruby-2.6.0/ruby/ruby.h:261:33: note: in definition of macro ‘RB_INT2FIX’
+  261 | #define RB_INT2FIX(i) (((VALUE)(i))<<1 | RUBY_FIXNUM_FLAG)
+      |                                 ^
+/usr/include/ruby-2.6.0/ruby/ruby.h:1594:20: note: in expansion of macro ‘RB_INT2NUM’
+ 1594 | #define INT2NUM(x) RB_INT2NUM(x)
+      |                    ^~~~~~~~~~
+mysql.c:2049:44: note: in expansion of macro ‘INT2NUM’
+ 2049 |     rb_define_const(cMysql, "SECURE_AUTH", INT2NUM(MYSQL_SECURE_AUTH));
+      |                                            ^~~~~~~
+mysql.c:2050:61: error: ‘MYSQL_OPT_GUESS_CONNECTION’ undeclared (first use in this function); did you mean ‘MYSQL_OPT_RECONNECT’?
+ 2050 |     rb_define_const(cMysql, "OPT_GUESS_CONNECTION", INT2NUM(MYSQL_OPT_GUESS_CONNECTION));
+      |                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/ruby-2.6.0/ruby/ruby.h:261:33: note: in definition of macro ‘RB_INT2FIX’
+  261 | #define RB_INT2FIX(i) (((VALUE)(i))<<1 | RUBY_FIXNUM_FLAG)
+      |                                 ^
+/usr/include/ruby-2.6.0/ruby/ruby.h:1594:20: note: in expansion of macro ‘RB_INT2NUM’
+ 1594 | #define INT2NUM(x) RB_INT2NUM(x)
+      |                    ^~~~~~~~~~
+mysql.c:2050:53: note: in expansion of macro ‘INT2NUM’
+ 2050 |     rb_define_const(cMysql, "OPT_GUESS_CONNECTION", INT2NUM(MYSQL_OPT_GUESS_CONNECTION));
+      |                                                     ^~~~~~~
+mysql.c:2051:68: error: ‘MYSQL_OPT_USE_EMBEDDED_CONNECTION’ undeclared (first use in this function)
+ 2051 |     rb_define_const(cMysql, "OPT_USE_EMBEDDED_CONNECTION", INT2NUM(MYSQL_OPT_USE_EMBEDDED_CONNECTION));
+      |                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/ruby-2.6.0/ruby/ruby.h:261:33: note: in definition of macro ‘RB_INT2FIX’
+  261 | #define RB_INT2FIX(i) (((VALUE)(i))<<1 | RUBY_FIXNUM_FLAG)
+      |                                 ^
+/usr/include/ruby-2.6.0/ruby/ruby.h:1594:20: note: in expansion of macro ‘RB_INT2NUM’
+ 1594 | #define INT2NUM(x) RB_INT2NUM(x)
+      |                    ^~~~~~~~~~
+mysql.c:2051:60: note: in expansion of macro ‘INT2NUM’
+ 2051 |     rb_define_const(cMysql, "OPT_USE_EMBEDDED_CONNECTION", INT2NUM(MYSQL_OPT_USE_EMBEDDED_CONNECTION));
+      |                                                            ^~~~~~~
+mysql.c:2052:66: error: ‘MYSQL_OPT_USE_REMOTE_CONNECTION’ undeclared (first use in this function)
+ 2052 |     rb_define_const(cMysql, "OPT_USE_REMOTE_CONNECTION", INT2NUM(MYSQL_OPT_USE_REMOTE_CONNECTION));
+      |                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/ruby-2.6.0/ruby/ruby.h:261:33: note: in definition of macro ‘RB_INT2FIX’
+  261 | #define RB_INT2FIX(i) (((VALUE)(i))<<1 | RUBY_FIXNUM_FLAG)
+      |                                 ^
+/usr/include/ruby-2.6.0/ruby/ruby.h:1594:20: note: in expansion of macro ‘RB_INT2NUM’
+ 1594 | #define INT2NUM(x) RB_INT2NUM(x)
+      |                    ^~~~~~~~~~
+mysql.c:2052:58: note: in expansion of macro ‘INT2NUM’
+ 2052 |     rb_define_const(cMysql, "OPT_USE_REMOTE_CONNECTION", INT2NUM(MYSQL_OPT_USE_REMOTE_CONNECTION));
+      |                                                          ^~~~~~~
+mysql.c:2053:54: error: ‘MYSQL_SET_CLIENT_IP’ undeclared (first use in this function); did you mean ‘MYSQL_SET_CHARSET_DIR’?
+ 2053 |     rb_define_const(cMysql, "SET_CLIENT_IP", INT2NUM(MYSQL_SET_CLIENT_IP));
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/usr/include/ruby-2.6.0/ruby/ruby.h:261:33: note: in definition of macro ‘RB_INT2FIX’
+  261 | #define RB_INT2FIX(i) (((VALUE)(i))<<1 | RUBY_FIXNUM_FLAG)
+      |                                 ^
+/usr/include/ruby-2.6.0/ruby/ruby.h:1594:20: note: in expansion of macro ‘RB_INT2NUM’
+ 1594 | #define INT2NUM(x) RB_INT2NUM(x)
+      |                    ^~~~~~~~~~
+mysql.c:2053:46: note: in expansion of macro ‘INT2NUM’
+ 2053 |     rb_define_const(cMysql, "SET_CLIENT_IP", INT2NUM(MYSQL_SET_CLIENT_IP));
+      |                                              ^~~~~~~
+error_const.h:2688:27: error: ‘ER_XPLUGIN_IP’ undeclared (first use in this function); did you mean ‘ER_PLUGIN_OOM’?
+ 2688 |     rb_define_mysql_const(ER_XPLUGIN_IP);
+      |                           ^~~~~~~~~~~~~
+/usr/include/ruby-2.6.0/ruby/ruby.h:261:33: note: in definition of macro ‘RB_INT2FIX’
+  261 | #define RB_INT2FIX(i) (((VALUE)(i))<<1 | RUBY_FIXNUM_FLAG)
+      |                                 ^
+/usr/include/ruby-2.6.0/ruby/ruby.h:1594:20: note: in expansion of macro ‘RB_INT2NUM’
+ 1594 | #define INT2NUM(x) RB_INT2NUM(x)
+      |                    ^~~~~~~~~~
+mysql.c:2286:62: note: in expansion of macro ‘INT2NUM’
+ 2286 | #define rb_define_mysql_const(s) rb_define_const(eMysql, #s, INT2NUM(s))
+      |                                                              ^~~~~~~
+error_const.h:2688:5: note: in expansion of macro ‘rb_define_mysql_const’
+ 2688 |     rb_define_mysql_const(ER_XPLUGIN_IP);
+      |     ^~~~~~~~~~~~~~~~~~~~~
+make: *** [Makefile:245 : mysql.o] Erreur 1
+
+make failed, exit code 2
