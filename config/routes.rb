@@ -22,9 +22,26 @@ Rails.application.routes.draw do
   post 'api/v1/creer_demande' => 'demande#createByUser'
   get 'api/v1/demandeParUtilisateur' => 'demande#listeByUser'
 
+  #gestion des emplois
+  post 'api/v1/creer_emploi' => 'emploi#create'
+  post 'api/v1/modifier_emploi' => 'emploi#modifier'
+  get 'api/v1/emplois' => 'emploi#getAllEmploi'
+ #gestion des parcours
+ post 'api/v1/creer_parcours' => 'parcours#create'
+ post 'api/v1/modifier_parcours' => 'parcours#modifier'
+ get 'api/v1/parcours' => 'parcours#getAllParcours'
 
+  #gestion des stages
+   post 'api/v1/creer_stage' => 'stage#create'
+   post 'api/v1/modifier_stage' => 'stage#modifier'
+   get 'api/v1/stages' => 'stage#getAllStage'
+  #gestion des competences
+  post 'api/v1/creer_competence' => 'competence#create'
   #gestion des apis des types de documents
   get 'api/v1/type_documents' => 'type_document#index'
+
+  #gestion des apis des donnees
+  get 'api/v1/donnees' => 'donnee#index'
 
   #gestion des services
   post 'api/v1/affecterService' => 'service#affecterUtilisateur'

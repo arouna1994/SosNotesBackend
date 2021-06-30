@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_085523) do
+ActiveRecord::Schema.define(version: 2021_06_28_191429) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -71,13 +71,21 @@ ActiveRecord::Schema.define(version: 2021_06_22_085523) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "competences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "donnee_id", null: false
+    t.text "contenu"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["donnee_id"], name: "index_competences_on_donnee_id"
+  end
+
   create_table "demandes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "type_document_id", null: false
     t.bigint "admin_user_id", null: false
-    t.text "modele"
     t.string "etat"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status"
     t.index ["admin_user_id"], name: "index_demandes_on_admin_user_id"
     t.index ["type_document_id"], name: "index_demandes_on_type_document_id"
   end
@@ -92,12 +100,17 @@ ActiveRecord::Schema.define(version: 2021_06_22_085523) do
     t.string "adresse_phy"
     t.string "email"
     t.string "telephone"
-    t.string "parcours_etude"
-    t.text "stage"
-    t.text "emploi"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["type_document_id"], name: "index_donnees_on_type_document_id"
+  end
+
+  create_table "emplois", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "annee"
+    t.text "contenu"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "donnee_id"
   end
 
   create_table "expressions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -107,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_06_22_085523) do
     t.string "comprehension"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "langue"
     t.index ["donnee_id"], name: "index_expressions_on_donnee_id"
   end
 
@@ -116,6 +130,15 @@ ActiveRecord::Schema.define(version: 2021_06_22_085523) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_user_id"], name: "index_historiques_on_admin_user_id"
+  end
+
+  create_table "parcours_etudes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "donnee_id", null: false
+    t.string "annee"
+    t.text "contenu"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["donnee_id"], name: "index_parcours_etudes_on_donnee_id"
   end
 
   create_table "piece_jointes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -140,6 +163,15 @@ ActiveRecord::Schema.define(version: 2021_06_22_085523) do
     t.index ["type_document_id"], name: "index_services_on_type_document_id"
   end
 
+  create_table "stages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "donnee_id", null: false
+    t.string "annee"
+    t.text "contenu"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["donnee_id"], name: "index_stages_on_donnee_id"
+  end
+
   create_table "type_documents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "libelle"
     t.string "etat"
@@ -148,12 +180,14 @@ ActiveRecord::Schema.define(version: 2021_06_22_085523) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "competences", "donnees"
   add_foreign_key "demandes", "admin_users"
   add_foreign_key "demandes", "type_documents"
   add_foreign_key "donnees", "type_documents"
+  add_foreign_key "expressions", "donnees"
   add_foreign_key "historiques", "admin_users"
+  add_foreign_key "parcours_etudes", "donnees"
   add_foreign_key "piece_jointes", "demandes"
   add_foreign_key "services", "type_documents"
-  add_foreign_key "expressions", "donnees"
-
+  add_foreign_key "stages", "donnees"
 end
