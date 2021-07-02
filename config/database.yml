@@ -9,14 +9,14 @@ default: &default
   timeout: 5000
 development:
   <<: *default
-  database: binddoc
+  database: sosnote
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: BindDocBackend_test
+  database: sosnote_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -39,6 +39,6 @@ test:
 #
 production:
   <<: *default
-  database: BindDocBackend_production
+  database: sosnote_production
   username: BindDocBackend
   password: <%= ENV['BINDDOCBACKEND_DATABASE_PASSWORD'] %>

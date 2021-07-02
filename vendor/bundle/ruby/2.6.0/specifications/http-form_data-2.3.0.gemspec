@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.email = ["ixti@member.fsf.org".freeze]
   s.homepage = "https://github.com/httprb/form_data.rb".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "3.0.3".freeze
+  s.rubygems_version = "3.0.8".freeze
   s.summary = "http-form_data-2.3.0".freeze
 
-  s.installed_by_version = "3.0.3" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.8" if s.respond_to? :installed_by_version
 end

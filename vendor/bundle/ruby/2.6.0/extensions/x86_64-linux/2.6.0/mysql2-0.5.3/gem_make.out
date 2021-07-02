@@ -1,5 +1,5 @@
 current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/mysql2-0.5.3/ext/mysql2
-/usr/bin/ruby2.6 -I /usr/lib/ruby/2.6.0 -r ./siteconf20210619-77881-v8128i.rb extconf.rb
+/usr/local/rvm/rubies/ruby-2.6.0/bin/ruby -I /usr/local/rvm/rubies/ruby-2.6.0/lib/ruby/site_ruby/2.6.0 -r ./siteconf20210702-14976-1bx0nbz.rb extconf.rb
 checking for rb_absint_size()... yes
 checking for rb_absint_singlebit_p()... yes
 checking for rb_wait_for_single_fd()... yes
@@ -23,7 +23,7 @@ checking for MYSQL_OPTION_MULTI_STATEMENTS_ON in mysql.h... yes
 checking for MYSQL_OPTION_MULTI_STATEMENTS_OFF in mysql.h... yes
 checking for my_bool in mysql.h... no
 -----
-Setting rpath to /usr/lib/x86_64-linux-gnu
+Setting libpath to /usr/lib/x86_64-linux-gnu
 -----
 creating Makefile
 
@@ -41,4 +41,4 @@ linking shared-object mysql2/mysql2.so
 
 current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/mysql2-0.5.3/ext/mysql2
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 mysql2.so ./.gem.20210619-77881-vzzo1s/mysql2
+/usr/bin/install -m 0755 mysql2.so ./.gem.20210702-14976-3cpg4a/mysql2

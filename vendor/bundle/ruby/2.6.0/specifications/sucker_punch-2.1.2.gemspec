@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/brandonhilkert/sucker_punch".freeze
   s.licenses = ["MIT".freeze]
   s.post_install_message = "Sucker Punch v2.0 introduces backwards-incompatible changes.\nPlease see https://github.com/brandonhilkert/sucker_punch/blob/master/CHANGES.md#200 for details.".freeze
-  s.rubygems_version = "3.0.3".freeze
+  s.rubygems_version = "3.0.8".freeze
   s.summary = "Sucker Punch is a Ruby asynchronous processing using concurrent-ruby, heavily influenced by Sidekiq and girl_friday.".freeze
 
-  s.installed_by_version = "3.0.3" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.8" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

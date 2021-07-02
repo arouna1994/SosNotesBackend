@@ -1,5 +1,5 @@
 current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/sassc-2.4.0/ext
-/usr/bin/ruby2.6 -I /usr/lib/ruby/2.6.0 -r ./siteconf20210619-62256-xj7dl8.rb extconf.rb
+/usr/local/rvm/rubies/ruby-2.6.0/bin/ruby -I /usr/local/rvm/rubies/ruby-2.6.0/lib/ruby/site_ruby/2.6.0 -r ./siteconf20210702-14976-3m4su6.rb extconf.rb
 creating Makefile
 
 current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/sassc-2.4.0/ext
@@ -7,7 +7,6 @@ make "DESTDIR=" clean
 
 current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/sassc-2.4.0/ext
 make "DESTDIR="
-compiling ./libsass/src/memory/allocator.cpp
 compiling ./libsass/src/ast.cpp
 compiling ./libsass/src/ast2c.cpp
 compiling ./libsass/src/ast_fwd_decl.cpp
@@ -50,6 +49,8 @@ compiling ./libsass/src/inspect.cpp
 compiling ./libsass/src/json.cpp
 compiling ./libsass/src/lexer.cpp
 compiling ./libsass/src/listize.cpp
+compiling ./libsass/src/memory/allocator.cpp
+compiling ./libsass/src/memory/shared_ptr.cpp
 compiling ./libsass/src/operators.cpp
 compiling ./libsass/src/output.cpp
 compiling ./libsass/src/parser.cpp
@@ -63,7 +64,6 @@ compiling ./libsass/src/sass2scss.cpp
 compiling ./libsass/src/sass_context.cpp
 compiling ./libsass/src/sass_functions.cpp
 compiling ./libsass/src/sass_values.cpp
-compiling ./libsass/src/memory/shared_ptr.cpp
 compiling ./libsass/src/source.cpp
 compiling ./libsass/src/source_map.cpp
 compiling ./libsass/src/stylesheet.cpp
@@ -77,4 +77,4 @@ linking shared-object sassc/libsass.so
 
 current directory: /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/sassc-2.4.0/ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 libsass.so ./.gem.20210619-62256-u0kr5t/sassc
+/usr/bin/install -m 0755 libsass.so ./.gem.20210702-14976-1h9z35y/sassc

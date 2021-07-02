@@ -12,29 +12,29 @@ NULLCMD = :
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /usr/include/ruby-2.6.0
+topdir = /usr/local/rvm/rubies/ruby-2.6.0/include/ruby-2.6.0
 hdrdir = $(topdir)
-arch_hdrdir = /usr/include/x86_64-linux-gnu/ruby-2.6.0
+arch_hdrdir = /usr/local/rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/x86_64-linux
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = $(DESTDIR)/usr
-rubysitearchprefix = $(sitearchlibdir)/$(RUBY_BASE_NAME)
-rubyarchprefix = $(archlibdir)/$(RUBY_BASE_NAME)
+prefix = $(DESTDIR)/usr/local/rvm/rubies/ruby-2.6.0
+rubysitearchprefix = $(rubylibprefix)/$(sitearch)
+rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
 exec_prefix = $(prefix)
-vendorarchhdrdir = $(sitearchincludedir)/$(RUBY_VERSION_NAME)/vendor_ruby
-sitearchhdrdir = $(sitearchincludedir)/$(RUBY_VERSION_NAME)/site_ruby
-rubyarchhdrdir = $(archincludedir)/$(RUBY_VERSION_NAME)
+vendorarchhdrdir = $(vendorhdrdir)/$(sitearch)
+sitearchhdrdir = $(sitehdrdir)/$(sitearch)
+rubyarchhdrdir = $(rubyhdrdir)/$(arch)
 vendorhdrdir = $(rubyhdrdir)/vendor_ruby
 sitehdrdir = $(rubyhdrdir)/site_ruby
 rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
-vendorarchdir = $(rubysitearchprefix)/vendor_ruby/$(ruby_version)
+vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = $(DESTDIR)./.gem.20210619-62256-j4o0uj
-sitelibdir = $(DESTDIR)./.gem.20210619-62256-j4o0uj
-sitedir = $(DESTDIR)/usr/local/lib/site_ruby
-rubyarchdir = $(rubyarchprefix)/$(ruby_version)
+sitearchdir = $(DESTDIR)./.gem.20210702-14976-llwyzr
+sitelibdir = $(DESTDIR)./.gem.20210702-14976-llwyzr
+sitedir = $(rubylibprefix)/site_ruby
+rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
 sitearchincludedir = $(includedir)/$(sitearch)
 archincludedir = $(includedir)/$(arch)
@@ -52,8 +52,7 @@ infodir = $(datarootdir)/info
 docdir = $(datarootdir)/doc/$(PACKAGE)
 oldincludedir = $(DESTDIR)/usr/include
 includedir = $(prefix)/include
-runstatedir = $(localstatedir)/run
-localstatedir = $(DESTDIR)/var
+localstatedir = $(prefix)/var
 sharedstatedir = $(prefix)/com
 sysconfdir = $(DESTDIR)/etc
 datadir = $(datarootdir)
@@ -69,8 +68,8 @@ CC = gcc
 CXX = g++
 LIBRUBY = $(LIBRUBY_SO)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
-LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
-LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static $(MAINLIBS)
+LIBRUBYARG_SHARED = -Wl,-rpath,'$${ORIGIN}/../lib' -Wl,-rpath,'$${ORIGIN}/../lib' -l$(RUBY_SO_NAME)
+LIBRUBYARG_STATIC = -Wl,-rpath,'$${ORIGIN}/../lib' -Wl,-rpath,'$${ORIGIN}/../lib' -l$(RUBY_SO_NAME)-static $(MAINLIBS)
 empty =
 OUTFLAG = -o $(empty)
 COUTFLAG = -o $(empty)
@@ -81,16 +80,16 @@ cflags   = $(optflags) $(debugflags) $(warnflags)
 cxxflags = $(optflags) $(debugflags) $(warnflags)
 optflags = -O3
 debugflags = -ggdb3
-warnflags = -Wall -Wextra -Wdeclaration-after-statement -Wdeprecated-declarations -Wimplicit-function-declaration -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-packed-bitfield-compat -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wsuggest-attribute=format -Wsuggest-attribute=noreturn -Wunused-variable -Wno-maybe-uninitialized
+warnflags = -Wall -Wextra -Wdeclaration-after-statement -Wdeprecated-declarations -Wduplicated-cond -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wrestrict -Wwrite-strings -Wimplicit-fallthrough=0 -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-packed-bitfield-compat -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wsuggest-attribute=format -Wsuggest-attribute=noreturn -Wunused-variable
 cppflags = 
 CCDLFLAGS = -fPIC
-CFLAGS   = $(CCDLFLAGS) -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -fPIC  -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES $(ARCH_FLAG)
+CFLAGS   = $(CCDLFLAGS) $(cflags)  -fPIC  -g -DXP_UNIX -O3 -Wall -Wcast-qual -Wwrite-strings -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     = 
-CPPFLAGS = -DHAVE_XMLPARSEDOC -DHAVE_XSLTPARSESTYLESHEETDOC -DHAVE_EXSLTFUNCREGISTER -DHAVE_XMLHASFEATURE -DHAVE_XMLFIRSTELEMENTCHILD -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETPARSERSTRUCTUREDERRORS -I/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/include/libxml2 -I/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34/include -I/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/include/libxml2 -Wdate-time -D_FORTIFY_SOURCE=2 $(DEFS) $(cppflags) "-DNOKOGIRI_LIBXML2_PATH=\"/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10\"" "-DNOKOGIRI_LIBXML2_PATCHES=\"0001-Revert-Do-not-URI-escape-in-server-side-includes.patch 0002-Remove-script-macro-support.patch 0003-Update-entities-to-remove-handling-of-ssi.patch 0004-libxml2.la-is-in-top_builddir.patch 0005-Fix-infinite-loop-in-xmlStringLenDecodeEntities.patch\"" "-DNOKOGIRI_LIBXSLT_PATH=\"/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34\"" "-DNOKOGIRI_LIBXSLT_PATCHES=\"\""
-CXXFLAGS = $(CCDLFLAGS) -g -O2 -fstack-protector-strong -Wformat -Werror=format-security $(ARCH_FLAG)
-ldflags  = -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic
-dldflags = -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--compress-debug-sections=zlib 
+CPPFLAGS = -DHAVE_XMLPARSEDOC -DHAVE_XSLTPARSESTYLESHEETDOC -DHAVE_EXSLTFUNCREGISTER -DHAVE_XMLHASFEATURE -DHAVE_XMLFIRSTELEMENTCHILD -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETPARSERSTRUCTUREDERRORS -I/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/include/libxml2 -I/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34/include -I/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/include/libxml2  $(DEFS) $(cppflags) "-DNOKOGIRI_LIBXML2_PATH=\"/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10\"" "-DNOKOGIRI_LIBXML2_PATCHES=\"0001-Revert-Do-not-URI-escape-in-server-side-includes.patch 0002-Remove-script-macro-support.patch 0003-Update-entities-to-remove-handling-of-ssi.patch 0004-libxml2.la-is-in-top_builddir.patch 0005-Fix-infinite-loop-in-xmlStringLenDecodeEntities.patch\"" "-DNOKOGIRI_LIBXSLT_PATH=\"/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34\"" "-DNOKOGIRI_LIBXSLT_PATCHES=\"\""
+CXXFLAGS = $(CCDLFLAGS) $(cxxflags) $(ARCH_FLAG)
+ldflags  = -L. -fstack-protector-strong -rdynamic -Wl,-export-dynamic
+dldflags = -Wl,--compress-debug-sections=zlib 
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
 LDSHARED = $(CC) -shared
@@ -98,25 +97,25 @@ LDSHAREDXX = $(CXX) -shared
 AR = ar
 EXEEXT = 
 
-RUBY_INSTALL_NAME = $(RUBY_BASE_NAME)2.6
-RUBY_SO_NAME = ruby-2.6
+RUBY_INSTALL_NAME = $(RUBY_BASE_NAME)
+RUBY_SO_NAME = ruby
 RUBYW_INSTALL_NAME = 
 RUBY_VERSION_NAME = $(RUBY_BASE_NAME)-$(ruby_version)
 RUBYW_BASE_NAME = rubyw
 RUBY_BASE_NAME = ruby
 
-arch = x86_64-linux-gnu
+arch = x86_64-linux
 sitearch = $(arch)
 ruby_version = 2.6.0
-ruby = $(bindir)/$(RUBY_BASE_NAME)2.6
+ruby = $(bindir)/$(RUBY_BASE_NAME)
 RUBY = $(ruby)
 ruby_headers = $(hdrdir)/ruby.h $(hdrdir)/ruby/backward.h $(hdrdir)/ruby/ruby.h $(hdrdir)/ruby/defines.h $(hdrdir)/ruby/missing.h $(hdrdir)/ruby/intern.h $(hdrdir)/ruby/st.h $(hdrdir)/ruby/subst.h $(arch_hdrdir)/ruby/config.h
 
 RM = rm -f
 RM_RF = $(RUBY) -run -e rm -- -rf
 RMDIRS = rmdir --ignore-fail-on-non-empty -p
-MAKEDIRS = /bin/mkdir -p
-INSTALL = /usr/bin/install -c
+MAKEDIRS = /usr/bin/mkdir -p
+INSTALL = /usr/bin/install
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
 COPY = cp
@@ -125,8 +124,8 @@ TOUCH = exit >
 #### End of system configuration section. ####
 
 preload = 
-libpath = . $(archlibdir) /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/lib /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34/lib
-LIBPATH =  -L. -L$(archlibdir) -L/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/lib -L/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34/lib
+libpath = . $(libdir) /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/lib /home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34/lib
+LIBPATH =  -L. -L$(libdir) -Wl,-rpath,$(libdir) -L/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/lib -Wl,-rpath,/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxml2/2.9.10/lib -L/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34/lib -Wl,-rpath,/home/arouna/stage/sosNote/sosNotesBackend/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.10/ports/x86_64-pc-linux-gnu/libxslt/1.1.34/lib
 DEFFILE = 
 
 CLEANFILES = mkmf.log

@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.homepage = "http://wiki.github.com/ffi/ffi".freeze
   s.licenses = ["Apache 2.0".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9".freeze)
-  s.rubygems_version = "3.0.3".freeze
+  s.rubygems_version = "3.0.8".freeze
   s.summary = "Ruby FFI Rakefile generator".freeze
 
-  s.installed_by_version = "3.0.3" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.8" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
